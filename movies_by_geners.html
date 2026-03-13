@@ -1,0 +1,11 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+<h2>Movies in gener: {{ gener.name }}</h2>
+<ul>
+  {% for m in movies %}
+    <li>{{ m.title }} – {{ m.released }} – {{ m.rating }}/10</li>
+  {% empty %}
+    <li>No movies found in gener: {{ gener.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

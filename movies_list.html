@@ -1,0 +1,398 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    html, body, .wrapper, .container {
+     all: unset !important;
+     display: block !important;#
+      width: 100% !important;
+      min-height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #ffe6e6 !important;
+      font-family: Arial, sans-serif !important;
+       color: #333; overflow-x: hidden !important;
+       }
+
+        .main-content {
+        padding: 0 0 40px 0;
+        width: 100%;
+        box-sizing: border-box;
+         }
+
+          h2 {
+          margin: 0;
+           padding: 10px 20px;
+           color: #cc0000;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+            font-family: 'Lucida Calligraphy', sans-serif;
+             font-size: 38px;
+             text-align: left;
+             position: sticky;
+             top: 0;
+             background-color: #ffe6e6; z-index: 10;
+              }
+
+               .movies-grid {
+               display: grid;
+               grid-template-columns: repeat(7, 1fr);
+               gap: 20px;
+               padding: 20px;
+               justify-items: center;
+               max-width: 100%;
+               box-sizing: border-box;
+               }
+
+               .movie-card {
+                background: rgba(255, 180, 180, 0.85);
+                border-radius: 12px;
+                box-shadow: 0 6px 15px rgba(153, 0, 0, 0.4);
+                overflow: hidden;
+                width: 180px;
+                text-align: center;
+                transition: transform 0.2s,
+                box-shadow 0.2s;
+                cursor: pointer;
+                }
+
+                .movie-card a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
+
+                 .movie-card img {
+                 width: 100%;
+                 height: 240px;
+                 object-fit: cover;
+                 display: block;
+                 border-radius: 12px;
+                  }
+
+                   .movie-title {
+                    margin: 10px 0;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #990000;
+                    }
+
+                     .movie-card:hover {
+                      transform: translateY(-5px);
+                      box-shadow: 0 8px 20px rgba(153, 0, 0, 0.6);
+                       }
+                     @media screen and (max-width: 1600px) { .movies-grid { grid-template-columns: repeat(7, 1fr); } }
+                     @media screen and (max-width: 1400px) { .movies-grid { grid-template-columns: repeat(6, 1fr); } }
+                     @media screen and (max-width: 1200px) { .movies-grid { grid-template-columns: repeat(5, 1fr); } }
+                     @media screen and (max-width: 900px) { .movies-grid { grid-template-columns: repeat(4, 1fr); } }
+                     @media screen and (max-width: 900px) { .movies-grid { grid-template-columns: repeat(3, 1fr); } }
+                     @media screen and (max-width: 600px) { .movies-grid { grid-template-columns: repeat(2, 1fr); } }
+                     @media screen and (max-width: 400px) { .movies-grid { grid-template-columns: 1fr; } }
+</style>
+<div class="main-content">
+    <h2>All Movies</h2>
+    <div class="movies-grid">
+        <!-- 1- A Walk to Remember -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'A Walk to Remember' %}">
+                <img src="{% static 'viewer/images/A_walk_to_remember(1).jpg' %}" alt="A Walk to Remember">
+                <div class="movie-title">A Walk to Remember</div>
+            </a>
+        </div>
+        <!-- 2- Barbie Mariposa -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Barbie Mariposa' %}">
+                <img src="{% static 'viewer/images/Barbie_Mariposa.jpg' %}" alt="Barbie Mariposa">
+                <div class="movie-title">Barbie Mariposa</div>
+            </a>
+        </div>
+        <!-- 3- Gone Girl -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Gone Girl' %}">
+                <img src="{% static 'viewer/images/GoneGirl.jpg' %}" alt="Gone Girl">
+                <div class="movie-title">Gone Girl</div>
+            </a>
+        </div>
+        <!-- 4- Pirate Of The Caribbean -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Pirates of the Caribbean' %}">
+                <img src="{% static 'viewer/images/PirateOfTheCaribbean.jpg' %}" alt="Pirate Of The Caribbean">
+                <div class="movie-title">Pirates of the Caribbean</div>
+            </a>
+        </div>
+        <!-- 5- Inception -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Inception' %}">
+                <img src="{% static 'viewer/images/Inception.jpg' %}" alt="Inception">
+                <div class="movie-title">Inception</div>
+            </a>
+        </div>
+        <!-- 6- Titanic -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Titanic' %}">
+                <img src="{% static 'viewer/images/Titanic.jpg' %}" alt="Titanic">
+                <div class="movie-title">Titanic</div>
+            </a>
+        </div>
+        <!-- 7- Moana -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Moana' %}">
+                <img src="{% static 'viewer/images/Moana.jpg' %}" alt="Moana">
+                <div class="movie-title">Moana</div>
+            </a>
+        </div>
+        <!-- 8- Social Dilemma -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Social Dilemma' %}">
+                <img src="{% static 'viewer/images/SocialDilemma.jpg' %}" alt="The Social Dilemma">
+                <div class="movie-title"> The Social Dilemma</div>
+            </a>
+        </div>
+        <!-- 9- Good, Bad and Ugly -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Good the Bad and the Ugly' %}">
+                <img src="{% static 'viewer/images/GoodBadUgly.jpg' %}" alt="The Good the Bad and the Ugly">
+                <div class="movie-title">The Good the Bad and the Ugly</div>
+            </a>
+        </div>
+        <!-- 10- Parasite -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Parasite' %}">
+                <img src="{% static 'viewer/images/parasite.jpg' %}" alt="Parasite">
+                <div class="movie-title">Parasite</div>
+            </a>
+        </div>
+        <!-- 11- Gladiator -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Gladiator' %}">
+                <img src="{% static 'viewer/images/gladiator.jpeg' %}" alt="Gladiator">
+                <div class="movie-title">Gladiator</div>
+            </a>
+        </div>
+        <!-- 12- Godfather -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Godfather' %}">
+                <img src="{% static 'viewer/images/godfather.png' %}" alt="The Godfather">
+                <div class="movie-title">The Godfather</div>
+            </a>
+        </div>
+        <!-- 13- Catch Me If You Can -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Catch me if you can' %}">
+                <img src="{% static 'viewer/images/CatchMeIfYouCan.jpg' %}" alt="Catch me if you can">
+                <div class="movie-title">Catch me if you can</div>
+            </a>
+        </div>
+        <!-- 14- Materialists -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Materialists' %}">
+                <img src="{% static 'viewer/images/Materalists.jpg' %}" alt="Materialists">
+                <div class="movie-title">Materialists</div>
+            </a>
+        </div>
+        <!-- 15- Tomy and Jerry -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Tomy and Jarry' %}">
+                <img src="{% static 'viewer/images/tomy_and_jerry.jpg' %}" alt="Tomy and Jarry">
+                <div class="movie-title">Tomy and Jarry</div>
+            </a>
+        </div>
+        <!-- 16- Inside Job -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Inside Job' %}">
+                <img src="{% static 'viewer/images/InsideJob.jpg' %}" alt="Inside Job">
+                <div class="movie-title">Inside Job</div>
+            </a>
+        </div>
+        <!-- 17- Shrek -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Shrek' %}">
+                <img src="{% static 'viewer/images/shrek.jpeg' %}" alt="Shrek">
+                <div class="movie-title">Shrek</div>
+            </a>
+        </div>
+        <!-- 18- Lord Of Rings -->
+        <div class="movie-card"> <a href="{% url 'movie_detail' 'The Lord of the Rings Trilogy' %}">
+            <img src="{% static 'viewer/images/LordOfRings.jpg' %}" alt="The Lord of the Rings Trilogy">
+            <div class="movie-title">The Lord of the Rings Trilogy</div>
+        </a>
+        </div>
+        <!-- 19- Home Alone -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Home Alone' %}">
+                <img src="{% static 'viewer/images/home_alone.jpg' %}" alt="Home Alone">
+                <div class="movie-title">Home Alone</div>
+            </a>
+        </div>
+        <!-- 20- Prisoners -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Prisoners' %}">
+                <img src="{% static 'viewer/images/Prisoners.jpg' %}" alt="Prisoners">
+                <div class="movie-title">Prisoners</div>
+            </a>
+        </div>
+        <!-- 21- The Hangover -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Hangover' %}">
+                <img src="{% static 'viewer/images/the-hangover.jpg' %}" alt="The Hangover">
+                <div class="movie-title">The Hangover</div>
+            </a>
+        </div>
+        <!-- 22- La La Land -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'La La Land' %}">
+                <img src="{% static 'viewer/images/LaLaLand.jpg' %}" alt="La La Land">
+                <div class="movie-title">La La Land</div>
+            </a>
+        </div>
+        <!-- 23- The Conjuring -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Conjuring' %}">
+                <img src="{% static 'viewer/images/TheConjuring.jpg' %}" alt="The Conjuring">
+                <div class="movie-title">The Conjuring</div>
+            </a>
+        </div>
+        <!-- 24- Nemo -->
+        <div class="movie-card"> <a href="{% url 'movie_detail' 'Finding Nemo' %}">
+            <img src="{% static 'viewer/images/Nemo.jpg' %}" alt="Finding Nemo">
+            <div class="movie-title">Finding Nemo</div>
+        </a>
+        </div>
+        <!-- 25- Kung Fu Panda -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Kung Fu Panda' %}">
+                <img src="{% static 'viewer/images/kung-fu-panda.jpg' %}" alt="Kung Fu Panda">
+                <div class="movie-title">Kung Fu Panda</div>
+            </a>
+        </div>
+        <!-- 26- Barbie in A Mermaid Tale -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Barbie in A Mermaid Tale' %}">
+                <img src="{% static 'viewer/images/Barbie_in_A_Mermaid_Tale.jpg' %}" alt="Barbie in A Mermaid Tale">
+                <div class="movie-title">Barbie in A Mermaid Tale</div>
+            </a>
+        </div>
+        <!-- 27- Notebook -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Notebook' %}">
+                <img src="{% static 'viewer/images/Notebook.jpg' %}" alt="The Notebook">
+                <div class="movie-title">The Notebook</div>
+            </a>
+        </div>
+        <!-- 28- The Departed -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Departed' %}">
+                <img src="{% static 'viewer/images/TheDepartedjpg.jpg' %}" alt="The Departed">
+                <div class="movie-title">The Departed</div>
+            </a>
+        </div>
+        <!-- 29- Lion King -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Lion King' %}">
+                <img src="{% static 'viewer/images/LionKing.jpg' %}" alt="The Lion King">
+                <div class="movie-title">The Lion King</div>
+            </a> </div>
+        <!-- 30- The Matrix -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Matrix' %}">
+                <img src="{% static 'viewer/images/The_Matrix.png' %}" alt="The Matrix">
+                <div class="movie-title">The Matrix</div>
+            </a>
+        </div>
+        <!-- 31- Secret We Keep -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The secrets we keeps' %}">
+                <img src="{% static 'viewer/images/SecretWeKeep.jpg' %}" alt="The secrets we keeps">
+                <div class="movie-title">The secrets we keeps</div>
+            </a>
+        </div>
+        <!-- 32- UP -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Up' %}">
+                <img src="{% static 'viewer/images/UP.jpg' %}" alt="Up">
+                <div class="movie-title">Up</div>
+            </a>
+        </div>
+        <!-- 33- Mission Impossibile -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Mission Impossible' %}">
+                <img src="{% static 'viewer/images/MImpossibilejpg.jpg' %}" alt="Mission Impossible">
+                <div class="movie-title">Mission Impossible</div>
+            </a>
+        </div>
+        <!-- 34- Spider-man: Into the Spider-verse -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Spider Man Into the Spider Verse' %}">
+                <img src="{% static 'viewer/images/spider-man-into-the-spider-verse-2.jpg' %}" alt="Spider Man Into the Spider Verse">
+                <div class="movie-title">Spider Man Into the Spider Verse</div>
+            </a>
+        </div>
+        <!-- 35- Frozen -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Frozen' %}">
+                <img src="{% static 'viewer/images/frozen.jpeg' %}" alt="Frozen">
+                <div class="movie-title">Frozen</div>
+            </a>
+        </div>
+        <!-- 36- Deadpool -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Deadpool' %}">
+                <img src="{% static 'viewer/images/Deadpool.png' %}" alt="Deadpool">
+                <div class="movie-title">Deadpool</div>
+            </a>
+        </div>
+        <!-- 37- Men in Black -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Men in Black' %}">
+                <img src="{% static 'viewer/images/Men_In_Black.jpg' %}" alt="Men in Black">
+                <div class="movie-title">Men in Black</div>
+            </a>
+        </div>
+        <!-- 38- The Bridgerton -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'The Bridgerton' %}">
+                <img src="{% static 'viewer/images/bridgertons.jpg' %}" alt="The Bridgerton">
+                <div class="movie-title">The Bridgerton</div>
+            </a>
+        </div>
+        <!-- 39- Shutter Island -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Shutter Island' %}">
+                <img src="{% static 'viewer/images/ShutterIsland.jpg' %}" alt="Shutter Island">
+                <div class="movie-title">Shutter Island</div>
+            </a>
+        </div>
+        <!-- 40- Sophia -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Sophia' %}">
+                <img src="{% static 'viewer/images/sophia.jpg' %}" alt="Sophia' %">
+                <div class="movie-title">Sophia</div>
+            </a>
+        </div>
+        <!-- 41- Passaporta -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Passaporta' %}">
+                <img src="{% static 'viewer/images/Pasaporta.jpg' %}" alt="Passaporta' %">
+                <div class="movie-title">Passaporta</div>
+            </a>
+        </div>
+        <!-- 42- Casablanca -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Casablanca' %}">
+                <img src="{% static 'viewer/images/casablanca.jpg' %}" alt="Casablanca' %">
+                <div class="movie-title">Casablanca</div>
+            </a>
+        </div>
+        <!-- 43- Tarot -->
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' 'Tarot' %}">
+                <img src="{% static 'viewer/images/tarot.jpg' %}" alt="Tarot' %">
+                <div class="movie-title">Tarot</div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

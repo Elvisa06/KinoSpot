@@ -1,0 +1,210 @@
+{% extends "viewer/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+/* Sfoni i faqes */
+body {
+    background-color: #ffe6e6 !important; /* sfondi i faqes */
+    font-family: 'Verdana', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Kutia kryesore e formës */
+.form-container {
+    width: 650px;
+    margin: 80px auto;
+    padding: 35px;
+    background: rgba(255, 255, 255, 1); /* bardhë plot për formën */
+    border-radius: 25px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.8), 0 0 25px rgba(204,0,0,0.5);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover efekt tek forma */
+.form-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 35px rgba(204,0,0,0.7);
+}
+
+/* Titulli */
+h2 {
+    color: #cc0000;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-family: 'Lucida Calligraphy', sans-serif;
+}
+
+h2 img {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Rreshtat e fushave */
+form .field-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+form .field-row label {
+    width: 150px;
+    font-weight: normal;
+    font-style: italic;
+    color: #cc0000;
+    text-align: left;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+form .field-row input,
+form .field-row select,
+form .field-row textarea {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #ffcccc;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+form .field-row input:focus,
+form .field-row select:focus,
+form .field-row textarea:focus {
+    border-color: #cc0000;
+    box-shadow: 0 0 6px rgba(204,0,0,0.2);
+}
+
+/* Butoni */
+button, .btn-primary {
+    background: #cc0000;
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 17px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover, .btn-primary:hover {
+    background: #990000;
+    transform: scale(1.05);
+}
+</style>
+
+<!-- Forma -->
+<div class="form-container">
+    <h2>
+        <img src="{% static 'viewer/images/movies.png' %}" alt="Movies">
+        Book your ticket
+    </h2>
+
+    <form method="post" action="{% url 'reservation_confirm' %}">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="field-row">
+            <label for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+            <input type="text" name="{{ form.full_name.name }}" id="{{ form.full_name.id_for_label }}"
+                   placeholder="Enter your full name" required>
+        </div>
+
+        <!-- Movie Title -->
+        <div class="field-row">
+            <label for="{{ form.movie_title.id_for_label }}">{{ form.movie_title.label }}</label>
+            <select name="{{ form.movie_title.name }}" id="{{ form.movie_title.id_for_label }}" required>
+                <option value="" selected hidden>Choose a movie</option>
+                {% for movie in form.fields.movie_title.queryset %}
+                    <option value="{{ movie.id }}">{{ movie.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Show Time -->
+        <div class="field-row">
+            <label for="{{ form.show_time.id_for_label }}">{{ form.show_time.label }}</label>
+            <input type="datetime-local" name="{{ form.show_time.name }}" id="{{ form.show_time.id_for_label }}" required>
+        </div>
+
+        <!-- Cinema -->
+        <div class="field-row">
+            <label for="id_cinema">{{ form.cinema.label }}</label>
+            <select name="{{ form.cinema.name }}" id="id_cinema" required>
+                <option value="" selected hidden>Choose the cinema</option>
+                {% for value, label in form.fields.cinema.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Hall -->
+        <div class="field-row">
+            <label for="id_hall">{{ form.hall.label }}</label>
+            <select name="{{ form.hall.name }}" id="id_hall" required>
+                <option value="" selected hidden>Choose the hall</option>
+            </select>
+        </div>
+
+        <!-- Tickets -->
+        <div class="field-row">
+            <label for="{{ form.tickets.id_for_label }}">{{ form.tickets.label }}</label>
+            <input type="number" name="{{ form.tickets.name }}" id="{{ form.tickets.id_for_label }}"
+                   min="1" placeholder="Enter number of tickets" required>
+        </div>
+
+        <!-- Email -->
+        <div class="field-row">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+                   placeholder="Enter your email" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Reserve</button>
+    </form>
+</div>
+
+<script>
+const cinemaSelect = document.getElementById("id_cinema");
+const hallSelect = document.getElementById("id_hall");
+
+const halls = {
+    'TEG': ['Salla A', 'Salla B', 'Salla C'],
+    'QTU': ['Salla A', 'Salla B']
+};
+
+cinemaSelect.addEventListener('change', function() {
+    const selectedCinema = this.value;
+    hallSelect.innerHTML = "";
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = "";
+    defaultOption.text = "Choose the hall";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.hidden = true;
+    hallSelect.add(defaultOption);
+
+    if(halls[selectedCinema]){
+        halls[selectedCinema].forEach(function(hall){
+            const option = document.createElement('option');
+            option.value = hall;
+            option.text = hall;
+            hallSelect.add(option);
+        });
+    }
+});
+</script>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,182 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+<div
+        style=" max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #fff0f0;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(153,0,0,0.4);
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        gap: 30px;
+        align-items: flex-start; ">
+
+    <!-- Fotoja në të majtë -->
+    <div style="flex: 0 0 300px;">
+        <div class="movie-card">
+            <a href="{% url 'movie_detail_by_title' movie_title=movie.title|urlencode %}" style="text-decoration: none;">
+
+                {% if movie.title == "A Walk to Remember" %}
+                <img src="{% static 'viewer/images/A_walk_to_remember(1).jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Barbie Mariposa" %}
+                <img src="{% static 'viewer/images/Barbie_Mariposa.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Gone Girl" %}
+                <img src="{% static 'viewer/images/GoneGirl.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Pirates of the Caribbean" %}
+                <img src="{% static 'viewer/images/PirateOfTheCaribbean.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Inception" %}
+                <img src="{% static 'viewer/images/Inception.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Titanic" %}
+                <img src="{% static 'viewer/images/Titanic.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Moana" %}
+                <img src="{% static 'viewer/images/Moana.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Social Dilemma" %}
+                <img src="{% static 'viewer/images/SocialDilemma.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Good the Bad and the Ugly" %}
+                <img src="{% static 'viewer/images/GoodBadUgly.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Parasite" %}
+                <img src="{% static 'viewer/images/parasite.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Gladiator" %}
+                <img src="{% static 'viewer/images/gladiator.jpeg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Godfather" %}
+                <img src="{% static 'viewer/images/godfather.png' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Catch me if you can" %}
+                <img src="{% static 'viewer/images/CatchMeIfYouCan.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Materialists" %}
+                <img src="{% static 'viewer/images/Materalists.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Tomy and Jarry" %}
+                <img src="{% static 'viewer/images/tomy_and_jerry.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Inside Job" %}
+                <img src="{% static 'viewer/images/InsideJob.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Shrek" %}
+                <img src="{% static 'viewer/images/shrek.jpeg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Lord of the Rings Trilogy" %}
+                <img src="{% static 'viewer/images/LordOfRings.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Home Alone" %}
+                <img src="{% static 'viewer/images/home_alone.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Prisoners" %}
+                <img src="{% static 'viewer/images/Prisoners.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Hangover" %}
+                <img src="{% static 'viewer/images/the-hangover.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "La La Land" %}
+                <img src="{% static 'viewer/images/LaLaLand.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Conjuring" %}
+                <img src="{% static 'viewer/images/TheConjuring.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Finding Nemo" %}
+                <img src="{% static 'viewer/images/Nemo.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Kung Fu Panda" %}
+                <img src="{% static 'viewer/images/kung-fu-panda.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Barbie in A Mermaid Tale" %}
+                <img src="{% static 'viewer/images/Barbie_in_A_Mermaid_Tale.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Notebook" %}
+                <img src="{% static 'viewer/images/Notebook.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Departed" %}
+                <img src="{% static 'viewer/images/TheDepartedjpg.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Lion King" %}
+                <img src="{% static 'viewer/images/LionKing.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Matrix" %}
+                <img src="{% static 'viewer/images/The_Matrix.png' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The secrets we keeps" %}
+                <img src="{% static 'viewer/images/SecretWeKeep.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Up" %}
+                <img src="{% static 'viewer/images/UP.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Mission Impossible" %}
+                <img src="{% static 'viewer/images/MImpossibilejpg.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Spider Man Into the Spider Verse" %}
+                <img src="{% static 'viewer/images/spider-man-into-the-spider-verse-2.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Frozen" %}
+                <img src="{% static 'viewer/images/frozen.jpeg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Deadpool" %}
+                <img src="{% static 'viewer/images/Deadpool.png' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Men in Black" %}
+                <img src="{% static 'viewer/images/Men_In_Black.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "The Bridgerton" %}
+                <img src="{% static 'viewer/images/bridgertons.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Shutter Island" %}
+                <img src="{% static 'viewer/images/ShutterIsland.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Casablanca" %}
+                <img src="{% static 'viewer/images/casablanca.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Sophia" %}
+                <img src="{% static 'viewer/images/sophia.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Passaporta" %}
+                <img src="{% static 'viewer/images/Pasaporta.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% elif movie.title == "Tarot" %}
+                <img src="{% static 'viewer/images/tarot.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+
+                {% else %}
+                <img src="{% static 'viewer/images/default.jpg' %}" alt="{{ movie.title }}" style="width:100%; border-radius:12px;">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Detajet në të djathtë -->
+    <div style="flex: 1; text-align: left;">
+        <h1 style=" color: #990000; font-size: 32px; margin-bottom: 15px; font-family: 'Lucida Calligraphy', sans-serif; ">{{ movie.title }}</h1>
+        <p style="color: #000; font-size: 18px;"><strong>Gener:</strong> {{ movie.gener.name }}</p>
+        <p style="color: #000; font-size: 18px;"><strong>Rating:</strong> {{ movie.rating }}/10</p>
+        <p style="color: #000; font-size: 18px;"><strong>Released:</strong> {{ movie.released|date:"F j, Y" }}</p>
+        <p style="color: #000; font-size: 18px;"><strong>Description:</strong> {{ movie.description }}</p>
+        <p style="color: #555; font-size: 14px;"><em>Added on: {{ movie.created|date:"F j, Y, H:i" }}</em></p>
+
+        <!-- Butoni -->
+        <div style="margin-top: 25px;">
+            <a href="{% url 'all_movies' %}"
+               style=" display: inline-block;
+                padding: 10px 20px;
+                background-color: #cc0000;
+                color: #fff;
+                font-weight: bold;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background-color 0.3s,
+                transform 0.2s;" onmouseover="this.style.backgroundColor='#990000'; this.style.color='#fff'; this.style.transform='scale(1.05)';"
+               onmouseout="this.style.backgroundColor='#cc0000'; this.style.color='#fff'; this.style.transform='scale(1)';"> ← Back to all movies </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

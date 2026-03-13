@@ -1,0 +1,188 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+  /* Mbishkruaj çdo gjë nga base.html */
+  html, body, .wrapper, .container {
+    all: unset !important; /* heq çdo stil nga parent */
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #ffe6e6 !important; /* nuancë e lehtë kuqe-pastel */
+    font-family: Arial, sans-serif !important;
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+  }
+
+  .search-box {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .search-box input[type="text"] {
+    padding: 10px 15px;
+    width: 300px;
+    border: 2px solid #cc0000;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background-color: #fff;
+  }
+
+  .search-box input[type="text"]:focus {
+    border-color: #cc0000;
+    box-shadow: 0 0 5px rgba(204, 0, 0, 0.7);
+  }
+
+  .search-box button {
+    padding: 10px 18px;
+    margin-left: 10px;
+    background-color: #cc0000;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .search-box button:hover {
+    background-color: #990000;
+    transform: scale(1.05);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  /* Kartat e filmit kuqe pastel dhe transparente për delikatesë */
+.movie-card {
+    background: rgba(255, 180, 180, 0.8) !important; /* pak më e errët */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(153, 0, 0, 0.6); /* shadow kuqe më e errët */
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+.movie-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(153, 0, 0, 0.8); /* shadow më i theksuar kur hover */
+}
+
+  .movie-info h4 {
+    margin: 0 0 12px;
+    font-size: 22px;
+    color: #990000;
+  }
+
+  .movie-info .meta {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 12px;
+  }
+
+  .movie-info .desc {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+    white-space: pre-line;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: auto;
+  }
+
+  .actions a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #cc0000;
+  }
+
+  .actions a:hover {
+    text-decoration: underline;
+    color: #990000;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: #cc0000;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    font-family: 'Lucida Calligraphy', sans-serif;
+  }
+</style>
+
+<div class="content-wrapper">
+  <h2>
+    <img src="{% static 'viewer/images/search.png' %}" alt="Search Icon"
+         style="width:50px; height:50px; vertical-align:middle; margin-right:10px;">
+    Search Movies
+  </h2>
+
+  <div class="search-box">
+    <form method="get">
+      <input type="text" name="q" placeholder="Search by title..." value="{{ q|default:'' }}">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  {% if q %}
+    <h3 style="text-align:center; margin-top:20px; color:#cc0000;">
+      Results for "<b>{{ q }}</b>": {{ count }}
+    </h3>
+    <div class="results-grid">
+      {% for m in results %}
+        <div class="movie-card" onclick="location.href='{% url 'movie_detail' m.id %}'">
+          <div class="movie-info">
+            <h4>{{ m.title }}</h4>
+            <p class="meta">🎭 {{ m.gener.name }} | ⭐ {{ m.rating }}/10 | 📅 {{ m.released }}</p>
+            <p class="desc">{{ m.description }}</p>
+            <div class="actions">
+              <a href="{% url 'movie_update' m.pk %}">✏️ Edit</a>
+              <a href="{% url 'movie_delete' m.pk %}">🗑 Delete</a>
+              <a href="{% url 'reservation_create' %}">🎟 Reserve Now</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p style="text-align:center; color:#808080;">No results.</p>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p style="text-align:center; color:#808080; font-size:14px;">
+      Write one word or the film title and click <b>"Search"</b>.
+    </p>
+  {% endif %}
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

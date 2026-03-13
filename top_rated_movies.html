@@ -1,0 +1,126 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+  /* Mbishkruaj çdo gjë nga base.html dhe vendos background pastel */
+  html, body, .wrapper, .container {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #ffe6e6 !important; /* e njëjta ngjyrë si tek search */
+    font-family: Arial, sans-serif !important;
+    color: #333;
+  }
+
+  h2 {
+    margin: 20px 0;
+    color: #cc0000;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    font-family: 'Lucida Calligraphy', sans-serif;
+    font-size: 38px;
+    text-align: center;
+  }
+
+  .movies-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+  }
+
+  .movie-card {
+    background: rgba(255, 180, 180, 0.85); /* pastel + pak transparencë */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(153, 0, 0, 0.4); /* shadow i kuq */
+    overflow: hidden;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .movie-card img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+  }
+
+  .movie-card h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #990000;
+  }
+
+  .movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(153, 0, 0, 0.6);
+  }
+
+  @media screen and (max-width: 1600px) {
+    .movies-container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+</style>
+
+<h2>Top Rated Movies</h2>
+
+<div class="movies-container">
+  {% for m in movies %}
+    <div class="movie-card">
+      {% if forloop.counter == 1 %}
+        <img src="{% static 'viewer/images/bridgertons.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 2 %}
+        <img src="{% static 'viewer/images/gladiator.jpeg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 3 %}
+        <img src="{% static 'viewer/images/tomy_and_jerry.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 4 %}
+        <img src="{% static 'viewer/images/home_alone.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 5 %}
+        <img src="{% static 'viewer/images/Barbie_Mariposa.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 6 %}
+        <img src="{% static 'viewer/images/NoteBook.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 7 %}
+        <img src="{% static 'viewer/images/A_walk_to_remember(1).jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 8 %}
+        <img src="{% static 'viewer/images/casablanca.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 9 %}
+        <img src="{% static 'viewer/images/LionKing.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 10 %}
+        <img src="{% static 'viewer/images/frozen.jpeg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 11 %}
+        <img src="{% static 'viewer/images/spider-man-into-the-spider-verse-2.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 12 %}
+        <img src="{% static 'viewer/images/MImpossibilejpg.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 13 %}
+        <img src="{% static 'viewer/images/The_Matrix.png' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 14 %}
+        <img src="{% static 'viewer/images/Deadpool.png' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 15 %}
+        <img src="{% static 'viewer/images/MenInBlack.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 16 %}
+        <img src="{% static 'viewer/images/UP.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 17 %}
+        <img src="{% static 'viewer/images/TheDepartedjpg.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 18 %}
+        <img src="{% static 'viewer/images/Pasaporta.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 19 %}
+        <img src="{% static 'viewer/images/sophia.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 20 %}
+        <img src="{% static 'viewer/images/ShutterIsland.jpg' %}" alt="{{ m.title }}">
+      {% elif forloop.counter == 21 %}
+        <img src="{% static 'viewer/images/tarot.jpg' %}" alt="{{ m.title }}">
+      {% else %}
+        <img src="{% static 'viewer/images/default.jpg' %}" alt="{{ m.title }}">
+      {% endif %}
+      <h3>{{ m.title }}</h3>
+    </div>
+  {% empty %}
+    <p>No movies available.</p>
+  {% endfor %}
+</div>
+{% endblock %}

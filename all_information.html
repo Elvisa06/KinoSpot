@@ -1,0 +1,294 @@
+{% extends "viewer/base.html" %}
+{% load static %}
+{% block content %}
+<style xmlns="http://www.w3.org/1999/html">
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Viner Hand ITC', sans-serif;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+section { scroll-snap-align: start; position: relative; }
+
+/* FAQJA 1 - Home */
+.home {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("{% static 'viewer/images/bobbin-popcorn.jpg' %}") no-repeat center center;
+    background-size: cover;
+}
+h1.home-title {
+    font-size: 5em;
+    color: red;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s, color 0.3s;
+}
+h1.home-title:hover {
+    transform: scale(1.05);
+    color: #001a33;
+}
+
+/* FAQJA 2 - About Us me background posht */
+.half-red-white {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-image: url("{% static 'viewer/images/bacground2.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.left {
+    flex: 6;
+    background-color: rgba(255,255,255,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.right {
+    flex: 4;
+    background-color: rgba(255,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.left h1 { color: black; font-size: 3em; margin-bottom: 20px; }
+.left p { color: #333; font-size: 1.2em; max-width: 500px; line-height: 1.6; text-align: center; }
+.right h1 { color: white; font-size: 3em; margin-bottom: 20px; }
+.right p { color: #fff; font-size: 1.2em; max-width: 400px; line-height: 1.6; text-align: center; }
+
+.notice {
+    color: red;        /* ngjyra e kuqe */
+    font-weight: normal;  /* jo e trashë */
+      /* më e vogël për të dalë një rresht */
+    margin: 5px 0;       /* hapësirë minimale mes fjalive */
+}
+
+
+.staggered-container {
+    position: relative;
+    width: 400px; /* ose sa duash */
+    height: 200px; /* përshtate sipas nevojës */
+    color: white;
+    font-style: italic;
+    font-size: 3em;
+    font-family: 'Viner Hand ITC', sans-serif;
+}
+
+.staggered-container {
+    position: relative;
+    width: 500px;  /* më i gjerë për shkallën */
+    height: 250px;
+    font-style: italic;
+    font-size: 3.5em; /* më i madh */
+    font-family: 'Viner Hand ITC', sans-serif;
+    color: white;
+}
+
+.staggered-container .word1 {
+    position: absolute;
+    top: 0;
+    left: 0;  /* Welcome nga e majta */
+}
+
+.staggered-container .word2 {
+    position: absolute;
+    top: 80px;    /* poshtë Welcome */
+    left: 120px;  /* më djathtas se Welcome */
+}
+
+.staggered-container .word3 {
+    position: absolute;
+    top: 160px;   /* poshtë to */
+    left: 200px;  /* akoma më djathtas */
+}
+
+/* FAQJA 3 - Offers */
+.offers {
+    min-height: 40vh;
+    background-color: red;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+.offers h1 { font-size: 3em; margin-bottom: 20px; }
+.offer-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.card {
+    background-color: white;
+    color: red;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.7);
+    min-width: 200px;
+    max-width: 250px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.9);
+}
+.icon { font-size: 2.5em; margin-bottom: 10px; }
+
+/* FAQJA 4 - Contact */
+.contact {
+    min-height: 30vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 50px;
+}
+.contact h1 { font-size: 2.5em; color: red; margin: 0 0 20px 0; }
+.contact-columns { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 30px; width: 100%; }
+.contact-column { display: flex; align-items: center; gap: 10px; padding: 0 15px; border-right: 1px solid red; }
+.contact-column:last-child { border-right: none; }
+.contact-icon { width: 30px; height: 30px; object-fit: contain; }
+.contact-text p { color: red; margin: 0; font-size: 1.1em; font-family: Arial, sans-serif; }
+
+/* FOOTER */
+footer {
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+}
+nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    font-family: 'Calibri Light';
+    font-weight: bold;
+    z-index: 10;
+}
+</style>
+
+<!-- FAQJA 1 -->
+<section class="home">
+    <h1 class="home-title">KinoSpot</h1>
+</section>
+
+<!-- FAQJA 2 -->
+<section class="half-red-white">
+    <div class="left">
+        <h1>About Us</h1>
+        <p style="font-family: 'Verdana', sans-serif;">
+            KinoSpot is an innovative online platform for movie lovers, allowing users to browse current films in nearby cinemas, read detailed information about each movie including genre, description, ratings, and released date, and book tickets directly for the closest cinema. KinoSpot brings a complete and user-friendly way to explore movies and reserve tickets online.
+        </p>
+        <p class="notice" style="font-family: 'Verdana', sans-serif; color: red; font-weight: bold;">
+    <u><i>Attention!!!</i></u>
+</p>
+        <p class="notice" style="font-family: 'Arial', sans-serif; margin-top: 20px; font-size: 0.9em;  text-align: center;">
+             1-Ticket payments must be completed in person at our stores.
+             <br>2-If you encounter any issues with your movie reservation, please visit our store for assistance.</br>
+        </p>
+
+    </div>
+
+    <div class="right">
+     <h1 class="staggered-container">
+         <span class="word1">Welcome</span>
+         <span class="word2">to</span>
+         <span class="word3">KinoSpot</span>
+     </h1>
+    </div>
+</section>
+
+<!-- FAQJA 3 -->
+<section class="offers">
+    <h1>Our Offers</h1>
+    <p style="font-family: 'Bungee', sans-serif;">Discover great offers, book tickets easily, and enjoy exclusive benefits.</p>
+    <div class="offer-cards">
+        <div class="card">
+            <div class="icon">🎟️</div>
+            <h2>50% Off</h2>
+            <p style="font-family: Arial, sans-serif;">On all tickets every Monday!</p>
+        </div>
+        <div class="card">
+            <div class="icon">🍿</div>
+            <h2>Free Popcorn</h2>
+            <p style="font-family: Arial, sans-serif;">Get free popcorn if you buy 3 tickets!</p>
+        </div>
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h2>Student Discount</h2>
+            <p style="font-family: Arial, sans-serif;">If you have a student card you will get a free ticket for your friend every Friday!</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQJA 4 -->
+<section class="contact">
+    <h1>Contact Us</h1>
+    <div class="contact-columns">
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/phone-call.png' %}" alt="Phone" class="contact-icon">
+            <div class="contact-text">
+                <p>0685445900</p>
+                <p>0691806668</p>
+            </div>
+        </div>
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/instagram.png' %}" alt="Instagram" class="contact-icon">
+            <div class="contact-text">
+                <p>kinospot_albania</p>
+            </div>
+        </div>
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/wp.png' %}" alt="WhatsApp" class="contact-icon">
+            <div class="contact-text">
+                <p>0685445900</p>
+            </div>
+        </div>
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/gmail.png' %}" alt="Email" class="contact-icon">
+            <div class="contact-text">
+                <p>info@kinospot.al</p>
+            </div>
+        </div>
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/fb.png' %}" alt="Facebook" class="contact-icon">
+            <div class="contact-text">
+                <p>kinoSpot_albania</p>
+            </div>
+        </div>
+        <div class="contact-column">
+            <img src="{% static 'viewer/images/location.png' %}" alt="Location" class="contact-icon">
+            <div class="contact-text">
+                <p>Cinema "Cineplex TEG"</p>
+                <p>Cinema "Cineplex QTU"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p style="font-family: 'Verdana', sans-serif;">&copy; 2025 KinoSpot | All rights reserved!</p>
+</footer>
+{% endblock %}
+
+
+

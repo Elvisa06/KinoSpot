@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <title>KinoSpot</title>
+  <style>
+   html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: linear-gradient(to bottom, #ffcce0, #ff99b3)
+    }
+
+      nav {
+  margin: 0;
+  padding: 15px;
+  text-align: right;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+
+       /* Dropdown menu */
+       .dropdown {
+        position: relative;
+        display: inline-block;
+         font-size: 1.2em;
+         cursor: pointer;
+         color: red; /* Ngjyrë link tek menynë #0056b3 */
+         }
+
+         .dropdown-content {
+         display: none;
+         position: absolute;
+         right: 0; /* Për të qenë në të djathtë */
+          background-color: rgba(255, 255, 255, 0.8); /* Pak transparent për efekt elegant */
+           min-width: 160px;
+           box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+           z-index: 1;
+           border-radius: 5px;
+           }
+
+           .dropdown-content a {
+           color: red ; /* Ngjyrë blu për link-et #0056b3 */
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+             }
+
+             .dropdown-content a:hover {
+             background-color: #ffd6d6; /* Hover efekt blu i lehtë #cce7ff*/
+             }
+
+             .dropdown:hover .dropdown-content {
+             display: block;
+              }
+
+               hr {
+               border: none;
+                height: 1px;
+                background-color: #99d1ff; /* Ngjyrë e lehtë blu për ndarësin */
+                margin: 0 15px 15px 15px;
+                }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="dropdown">
+    &#9776; Menu
+    <div class="dropdown-content">
+      <a href="/">Home</a>
+      <a href="/allmovies/">Movies</a>
+      <a href="/allgeners/">Geners</a>
+      <a href="/topmovies/">Top Movies</a>
+      <a href="/movies/search/">Search Movie</a>
+      <a href="/movies/create/">Add Movie</a>
+      <a href="/reserve/">Reserve Now</a>
+
+
+
+    </div>
+  </div>
+</nav>
+<hr>
+{% block content %}
+{% endblock %}
+</body>
+</html>

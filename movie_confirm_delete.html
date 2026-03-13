@@ -1,0 +1,95 @@
+<!-- viewer/templates/viewer/movie_confirm_delete.html -->
+{% extends "viewer/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .delete-container {
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+  }
+
+  .delete-container h2 {
+    margin-bottom: 20px;
+    font-family: 'Lucida Calligraphy', sans-serif;
+    font-size: 28px;
+    color: #b22222;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .delete-container p {
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: #444;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin: 0 12px;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
+  /* Të dy butonat do kenë të njëjtin stil */
+  .btn-delete, .btn-cancel {
+    background: linear-gradient(135deg, #ff6666, #ff4d4d);
+  }
+
+  .btn-delete:hover, .btn-cancel:hover {
+    background: linear-gradient(135deg, #c82333, #a71d2a);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+
+  .btn:active {
+    transform: scale(0.95);
+  }
+
+  .btn img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+</style>
+
+<div class="delete-container">
+  <h2>
+    <img src="{% static 'viewer/images/user.png' %}" alt="User" style="width:40px; height:40px; vertical-align:middle; margin-right:10px;">
+    Delete Movie
+  </h2>
+  <p>Are you sure you want to delete the movie: <b>{{ object.title }}</b>?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-delete">
+        <img src="{% static 'viewer/images/trash.png' %}" alt="Delete">
+        Yes, delete
+    </button>
+    <a href="{% url 'index' %}" class="btn btn-cancel">
+        <img src="{% static 'viewer/images/remove (2).png' %}" alt="Cancel">
+        Cancel
+    </a>
+  </form>
+</div>
+{% endblock %}

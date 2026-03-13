@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+            line-height: 1.5;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #ff4d4d; /* ngjyra kuqe e lehtë */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo e kinemasë -->
+       <img src="/static/images/cineplex.png" alt="Cineplex Logo" class="logo">
+
+
+        <h2>Rezervimi juaj u krye me sukses!</h2>
+        <p>Detajet e rezervimit tuaj janë:</p>
+        <div class="details">
+            <p><strong>Filmi:</strong> {{ movie_title }}</p>
+            <p><strong>Kinema:</strong> {{ cinema }}</p>
+            <p><strong>Sallë:</strong> {{ hall }}</p>
+            <p><strong>Ora:</strong> {{ time }}</p>
+            <p><strong>Numri i biletave:</strong> {{ tickets }}</p>
+        </div>
+        <a href="{{ reservation_link }}" class="button">Shiko rezervimin</a>
+        <p>Faleminderit që rezervuat me ne!</p>
+    </div>
+</body>
+</html>

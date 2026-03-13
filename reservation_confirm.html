@@ -1,0 +1,93 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+/* Kutia kryesore */
+.form-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px 35px;
+    background-color: #fff7f7;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Titulli kryesor */
+.form-container h2 {
+    color: #d32f2f;
+    font-size: 30px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Pikat e informacionit */
+.info-box {
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    background-color: #ffecec;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Shkronja më e qartë dhe e lexueshme */
+.info-box strong {
+    color: #b71c1c;
+    font-weight: 600;
+}
+
+/* Butoni PDF */
+.btn-primary {
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
+}
+
+/* Ikona tek titulli */
+.ticket-icon {
+    width: 50px;
+    height: 50px;
+}
+</style>
+
+<div class="form-container">
+    <h2>
+        <img src="{% static 'viewer/images/reserved.png' %}" alt="Ticket" class="ticket-icon">
+        Reservation Confirmed!
+    </h2>
+
+    <div class="info-box"><strong>👤 Name:</strong> {{ data.full_name }}</div>
+    <div class="info-box"><strong>🎬 Movie:</strong> {{ data.movie_title }}</div>
+    <div class="info-box"><strong>🕒 Show Time:</strong> {{ data.show_time }}</div>
+    <div class="info-box"><strong>🏢 Cinema:</strong> {{ data.cinema }}</div>
+    <div class="info-box"><strong>🎟 Hall:</strong> {{ data.hall }}</div>
+    <div class="info-box"><strong>🎫 Tickets:</strong> {{ data.tickets }}</div>
+    <div class="info-box"><strong>📧 Email:</strong> {{ data.email }}</div>
+
+    <a href="{% url 'download_ticket' %}" class="btn btn-primary">Download Ticket PDF</a>
+</div>
+
+{% endblock %}
+
+

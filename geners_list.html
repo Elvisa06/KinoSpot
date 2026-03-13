@@ -1,0 +1,199 @@
+{% extends "viewer/base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+html, body, .wrapper, .container {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #ffe6e6 !important;
+    font-family: 'Trade Gothic', sans-serif !important;
+    color: #333 !important;
+}
+
+h2 {
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    color: red;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    font-family: 'Lucida Calligraphy', sans-serif;
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 80px 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+li {
+    background-color: #ff0000;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85em;
+    white-space: nowrap;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+li:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    margin-top: 30px;
+}
+
+.movie-card {
+    background: rgba(255, 180, 180, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(153, 0, 0, 0.4);
+    overflow: hidden;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #990000;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(153, 0, 0, 0.6);
+}
+</style>
+
+<h2>All Geners</h2>
+<ul>
+  {% for g in geners %}
+    <li data-genre="{{ g.name }}">{{ g.name }} ({{ g.movie_count }})</li>
+  {% empty %}
+    <li>No geners available.</li>
+  {% endfor %}
+</ul>
+
+<div id="movies-list" class="movies-container"></div>
+
+<script>    <!--JavaScript---Pasi faqja hapet, gjen të gjitha li qe perfaqesojne gjinite. -->
+            <!-- Pergatitet 1 map (dictionary) qe lidhet titulli i filmit me imazhin e tij. -->
+
+document.addEventListener('DOMContentLoaded', function() {
+    const genreButtons = document.querySelectorAll('li[data-genre]');
+    const moviesContainer = document.getElementById('movies-list');
+
+    // Mapping titull -> foto
+    const movieImages = {
+        "The Departed": "{% static 'viewer/images/TheDepartedjpg.jpg' %}",
+        "Inception": "{% static 'viewer/images/Inception.jpg' %}",
+        "Gladiator": "{% static 'viewer/images/gladiator.jpeg' %}",
+        "Catch me if you can": "{% static 'viewer/images/CatchMeIfYouCan.jpg' %}",
+        "Prisoners": "{% static 'viewer/images/Prisoners.jpg' %}",
+        "Spider Man Into the Spider Verse": "{% static 'viewer/images/spider-man-into-the-spider-verse-2.jpg' %}",
+        "The Matrix": "{% static 'viewer/images/The_Matrix.png' %}",
+        "Shrek": "{% static 'viewer/images/shrek.jpeg' %}",
+        "The Good the Bad and the Ugly": "{% static 'viewer/images/GoodBadUgly.jpg' %}",
+        "Gone Girl": "{% static 'viewer/images/GoneGirl.jpg' %}",
+        "Parasite": "{% static 'viewer/images/parasite.jpg' %}",
+        "The Conjuring": "{% static 'viewer/images/TheConjuring.jpg' %}",
+        "Tarot": "{% static 'viewer/images/tarot.jpg' %}",
+        "Passaporta": "{% static 'viewer/images/pasaporta.jpg' %}",
+        "Sophia": "{% static 'viewer/images/sophia.jpg' %}",
+        "The Notebook": "{% static 'viewer/images/Notebook.jpg' %}",
+        "A Walk to Remember": "{% static 'viewer/images/A_walk_to_remember(1).jpg' %}",
+        "Casablanca": "{% static 'viewer/images/casablanca.jpg' %}",
+        "The Lord of the Rings Trilogy": "{% static 'viewer/images/LordOfRings.jpg' %}",
+        "Shutter Island": "{% static 'viewer/images/ShutterIsland.jpg' %}",
+        "The Bridgerton": "{% static 'viewer/images/bridgertons.jpg' %}",
+        "Titanic": "{% static 'viewer/images/Titanic.jpg' %}",
+        "Materialists": "{% static 'viewer/images/Materalists.jpg' %}",
+        "La La Land": "{% static 'viewer/images/LaLaLand.jpg' %}",
+        "The Social Dilemma": "{% static 'viewer/images/SocialDilemma.jpg' %}",
+        "Inside Job": "{% static 'viewer/images/InsideJob.jpg' %}",
+        "The Godfather": "{% static 'viewer/images/godfather.png' %}",
+        "Home Alone": "{% static 'viewer/images/home_alone.jpg' %}",
+        "The Hangover": "{% static 'viewer/images/the-hangover.jpg' %}",
+        "Deadpool": "{% static 'viewer/images/Deadpool.png' %}",
+        "Men in Black": "{% static 'viewer/images/Men_in_Black.jpg' %}",
+        "Finding Nemo": "{% static 'viewer/images/Nemo.jpg' %}",
+        "Kung Fu Panda": "{% static 'viewer/images/kung-fu-panda.jpg' %}",
+        "Barbie Mariposa": "{% static 'viewer/images/Barbie_Mariposa.jpg' %}",
+        "Barbie in A Mermaid Tale": "{% static 'viewer/images/Barbie_in_A_Mermaid_Tale.jpg' %}",
+        "The Lion King": "{% static 'viewer/images/LionKing.jpg' %}",
+        "Frozen": "{% static 'viewer/images/frozen.jpeg' %}",
+        "Up": "{% static 'viewer/images/Up.jpg' %}",
+        "Pirates of the Caribbean": "{% static 'viewer/images/PirateOfTheCaribbean.jpg' %}",
+        "Moana": "{% static 'viewer/images/Moana.jpg' %}",
+        "Tomy and Jarry": "{% static 'viewer/images/tomy_and_jerry.jpg' %}",
+        "The secrets we keeps": "{% static 'viewer/images/SecretWeKeep.jpg' %}",
+        "Mission Impossible": "{% static 'viewer/images/MImpossibilejpg.jpg' %}",
+
+
+    };
+
+    <!--Kur perdoruesi klikon nje gjini → ben nje request AJAX tek /movies-by-gener/?gener=GENRE_NAME.-->
+    <!-- Serveri kthen një JSON me filmat e asaj gjinie.Pastrohet lista ekzistuese e filmave.-->
+
+    genreButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const genreName = this.getAttribute('data-genre');
+
+            fetch(`/movies-by-gener/?gener=${encodeURIComponent(genreName)}`)
+            .then(res => res.json())
+            .then(data => {
+                moviesContainer.innerHTML = '';
+
+                if(data.movies.length === 0){
+                    moviesContainer.innerHTML = '<p>No movies found for this genre.</p>';
+                } else {
+                    data.movies.forEach(movie => {
+                        const div = document.createElement('div');
+                        div.classList.add('movie-card');
+
+                        let imgSrc = movieImages[movie.title] || "{% static 'viewer/images/default.jpg' %}";
+
+                        div.innerHTML = `
+                            <img src="${imgSrc}" alt="${movie.title}">
+                            <h3>${movie.title}</h3>
+                        `;
+                        moviesContainer.appendChild(div);
+                    });
+                }
+            })
+            .catch(err => console.error(err));
+        });
+    });
+});
+</script>
+
+{% endblock %}
+
+
+
